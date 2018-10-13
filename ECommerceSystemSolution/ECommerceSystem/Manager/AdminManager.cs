@@ -28,5 +28,18 @@ namespace ECommerceSystem.Manager
                 return "Failed to save User";
             }
         }
+        public string SaveProduct(Product product)
+        {
+            int msg = adminGateway.SaveUser(product);
+            if (msg > 0)
+            {
+                return "User has been saved successfully";
+            }
+            else
+            {
+                return "Failed to save User";
+            }
+        }
+        
     }
 }

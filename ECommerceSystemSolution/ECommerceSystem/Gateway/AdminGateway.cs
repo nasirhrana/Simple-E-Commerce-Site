@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -48,5 +49,21 @@ namespace ECommerceSystem.Gateway
             con.Close();
             return rowAffected;
         }
+        public int SaveUser(Product product)
+        {
+            string query = @"INSERT INTO [dbo].[Product]
+           ([ProductName]
+           ,[ProductImage]
+           ,[CompanyName]
+           ,[ProductDescription]
+           ,[ProductPrice])
+     VALUES('" + product.ProductName + "','" + product.UploadFile + "','" + product.CompanyName + "','" + product.Description + "','"+product.ProductPrice+"')";
+            SqlCommand cmd = new SqlCommand(query, con);
+            con.Open();
+            int rowAffected = cmd.ExecuteNonQuery();
+            con.Close();
+            return rowAffected;
+        }
+        
     }
 }
