@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ECommerceSystem.Manager;
 using ECommerceSystem.Models;
+using ECommerceSystem.ViewModel;
 
 namespace ECommerceSystem.Controllers
 {
@@ -92,6 +93,13 @@ namespace ECommerceSystem.Controllers
         {
             var productList = adminManager.GetProductNameByProductTypeId(productTypeId);
             return Json(productList.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetAllOrder()
+        {
+            List<SalesRecord> salesList = adminManager.GetAllSalesRecord();
+            ViewBag.TotalOrder = salesList.Count;
+            return View(salesList);
         }
         
 	}

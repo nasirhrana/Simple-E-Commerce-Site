@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using ECommerceSystem.Gateway;
 using ECommerceSystem.Models;
+using ECommerceSystem.ViewModel;
 
 namespace ECommerceSystem.Manager
 {
@@ -23,7 +24,10 @@ namespace ECommerceSystem.Manager
         {
             return adminGateway.GetProductNameByProductTypeId(productId);
         }
-
+        public List<SalesRecord> GetAllSalesRecord()
+        {
+            return adminGateway.GetAllSalesRecord();
+        }
         public string SaveUser(User user)
         {
             int msg = adminGateway.SaveUser(user);
