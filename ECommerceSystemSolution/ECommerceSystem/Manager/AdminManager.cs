@@ -15,6 +15,14 @@ namespace ECommerceSystem.Manager
         {
             return adminGateway.GetAllUserType();
         }
+        public List<ProductType> GetAllProductCode()
+        {
+            return adminGateway.GetAllProductCode();
+        }
+        public List<ProductTypeName> GetProductNameByProductTypeId(int productId)
+        {
+            return adminGateway.GetProductNameByProductTypeId(productId);
+        }
 
         public string SaveUser(User user)
         {
@@ -30,14 +38,14 @@ namespace ECommerceSystem.Manager
         }
         public string SaveProduct(Product product)
         {
-            int msg = adminGateway.SaveUser(product);
+            int msg = adminGateway.SaveProduct(product);
             if (msg > 0)
             {
-                return "User has been saved successfully";
+                return "Product has been saved successfully";
             }
             else
             {
-                return "Failed to save User";
+                return "Failed to save Product";
             }
         }
         

@@ -31,6 +31,42 @@ namespace ECommerceSystem.Gateway
             con.Close();
             return aList;
         }
+        public List<ProductType> GetAllProductCode()
+        {
+            string query = @"select * from [dbo].[ProductType]";
+            SqlCommand cmd = new SqlCommand(query, con);
+            con.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<ProductType> aList = new List<ProductType>();
+            while (reader.Read())
+            {
+                ProductType productType = new ProductType();
+                productType.ProductTypeId = (int)reader["ProductTypeId"];
+                productType.ProductTypeName = reader["ProductTypeName"].ToString();
+                aList.Add(productType);
+            }
+            reader.Close();
+            con.Close();
+            return aList;
+        }
+        public List<ProductTypeName> GetProductNameByProductTypeId(int productId)
+        {
+            string query = @"select * from ProductName where ProductTypeId='"+productId+"'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            con.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<ProductTypeName> aList = new List<ProductTypeName>();
+            while (reader.Read())
+            {
+                ProductTypeName productTypeName = new ProductTypeName();
+                productTypeName.ProductNameId = (int)reader["ProductNameId"];
+                productTypeName.ProductName = reader["ProductName"].ToString();
+                aList.Add(productTypeName);
+            }
+            reader.Close();
+            con.Close();
+            return aList;
+        }
 
         public int SaveUser(User user)
         {
@@ -49,15 +85,16 @@ namespace ECommerceSystem.Gateway
             con.Close();
             return rowAffected;
         }
-        public int SaveUser(Product product)
+        public int SaveProduct(Product product)
         {
             string query = @"INSERT INTO [dbo].[Product]
-           ([ProductName]
+           ([ProductTypeId]
+            ,[ProductNameId]
            ,[ProductImage]
            ,[CompanyName]
            ,[ProductDescription]
            ,[ProductPrice])
-     VALUES('" + product.ProductName + "','" + product.UploadFile + "','" + product.CompanyName + "','" + product.Description + "','"+product.ProductPrice+"')";
+     VALUES('" + product.ProductTypeId + "','" + product.ProductNameId + "','" + product.UploadFile + "','" + product.CompanyName + "','" + product.Description + "','" + product.ProductPrice + "')";
             SqlCommand cmd = new SqlCommand(query, con);
             con.Open();
             int rowAffected = cmd.ExecuteNonQuery();

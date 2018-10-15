@@ -11,7 +11,11 @@ namespace ECommerceSystem.Models
     {
         public int ProductId { get; set; }
         [Required]
-        public string ProductName { get; set; }
+        [DisplayName("Product Type")]
+        public int ProductTypeId { get; set; }
+        [Required]
+        [DisplayName("Product Name")]
+        public int ProductNameId { get; set; }
         [Required]
         [DisplayName("Upoad file")]
         public string UploadFile { get; set; }
@@ -21,7 +25,7 @@ namespace ECommerceSystem.Models
         [Required]
         public string CompanyName { get; set; }
         [Required]
-        [Range(0, 9, ErrorMessage = "Price should be positive")]
+        [Range(0.0, Double.MaxValue)]
         public double ProductPrice { get; set; }
     }
 }

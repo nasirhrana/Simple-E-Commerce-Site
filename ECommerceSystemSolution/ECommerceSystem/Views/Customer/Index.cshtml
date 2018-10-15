@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h2>Selling Product </h2>
+
+<table class="table">
+    <tr>
+        <th>
+            <label>Search By Doctors Name</label>
+            <input class="form-control" id="drSearch" />
+        </th>
+        <th>
+            <label>Search By Specialist</label>
+
+            <select name="ProductTypeId" id="ProductTypeId" class="form-control">
+                <option value="">--Select Product Type--</option>
+                @foreach (var productType in ViewBag.ProductCode)
+                {
+                    <option value="@productType.ProductTypeId">@productType.ProductTypeName</option>
+                }
+            </select>
+
+        </th>
+    </tr>
+</table>
+<form>
+    <table class="table table-striped table-bordered" id="tableId">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Product Type Id</th>
+                <th>Product Name Id</th>
+                <th>Product Picture</th>
+                <th>Description</th>
+                <th>Company Name</th>
+                <th>Produc Price</th>
+
+            </tr>
+        </thead>
+
+
+    </table>
+</form>
+
+@section scripts
+{
+    
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+@*<script src="~/Scripts/DataTables/responsive.jqueryui.js"></script>*@
+@*<script src="~/Scripts/DataTables/dataTables.jqueryui.js"></script>*@
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script>
+
+        $(document).ready(function() {
+            $('#tableId').hide();
+            $("#ProductTypeId").change(function () {
+             var pId = $("#ProductTypeId").val();
+             var json = { productTypeId: pId };
+             $('#tableId').empty();
+             $('#tableId').show();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetProductByProductTypeId", "Customer")',
+                //url: '/Department/GetStudentsByDepartmentId',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(json),
+                success: function (data) {
+                    $('#tableId').dataTable({
+                        destroy: true,
+                        data: data,
+                        columns: [
+                            { 'data': 'ProductId' },
+                            { 'data': 'ProductTypeId' },
+                            { 'data': 'ProductNameId' },
+                            {
+                                'data': 'UploadFile', 
+                                 "render": function(data) { return '<img src="/UploadFile/' + data + '" style="height:80px;width:80px;"/>'; }
+                            },
+                            { 'data': 'Description' },
+                            { 'data': 'CompanyName' },
+                            { 'data': 'ProductPrice' },
+                            { "targets": [8], "data": "ProductId", "render": function (data, type, full) { return '@Html.ActionLink("Send Order", "SellOrder", new { id = "replace" })'.replace("replace", data); } }
+
+                        ]
+                    });
+
+                }
+            });
+
+        });
+
+ });
+    </script>
+}

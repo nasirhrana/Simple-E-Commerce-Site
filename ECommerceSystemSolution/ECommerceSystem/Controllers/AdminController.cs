@@ -22,6 +22,7 @@ namespace ECommerceSystem.Controllers
         public ActionResult CreateUser()
         {
             ViewBag.UserType = adminManager.GetAllUserType();
+           
             return View();
         }
         [HttpPost]
@@ -37,11 +38,13 @@ namespace ECommerceSystem.Controllers
         [HttpGet]
         public ActionResult CreateProduct()
         {
+            ViewBag.ProductCode = adminManager.GetAllProductCode();
             return View();
         }
         [HttpPost]
         public ActionResult CreateProduct(Product product, HttpPostedFileBase UploadFile)
         {
+            ViewBag.ProductCode = adminManager.GetAllProductCode();
             if (UploadFile != null)
             {
                 if (UploadFile.ContentType == "image/jpeg" || UploadFile.ContentType == "image/png" || UploadFile.ContentType == "image/gif")
@@ -83,6 +86,12 @@ namespace ECommerceSystem.Controllers
                 }
             }
             return View();
+        }
+
+        public ActionResult GetProductNameByProductTypeId(int productTypeId)
+        {
+            var productList = adminManager.GetProductNameByProductTypeId(productTypeId);
+            return Json(productList.ToList(), JsonRequestBehavior.AllowGet);
         }
         
 	}

@@ -105,6 +105,6 @@ C:\Users\nasir\Desktop\xyz\ECommerceSystemSolution\ECommerceSystem\bin\Microsoft
 C:\Users\nasir\Desktop\xyz\ECommerceSystemSolution\ECommerceSystem\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\nasir\Desktop\xyz\ECommerceSystemSolution\ECommerceSystem\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\nasir\Desktop\xyz\ECommerceSystemSolution\ECommerceSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\nasir\Desktop\xyz\ECommerceSystemSolution\ECommerceSystem\obj\Debug\ECommerceSystem.csprojResolveAssemblyReference.cache
 C:\Users\nasir\Desktop\xyz\ECommerceSystemSolution\ECommerceSystem\obj\Debug\ECommerceSystem.dll
 C:\Users\nasir\Desktop\xyz\ECommerceSystemSolution\ECommerceSystem\obj\Debug\ECommerceSystem.pdb
+C:\Users\nasir\Desktop\xyz\ECommerceSystemSolution\ECommerceSystem\obj\Debug\ECommerceSystem.csprojResolveAssemblyReference.cache
