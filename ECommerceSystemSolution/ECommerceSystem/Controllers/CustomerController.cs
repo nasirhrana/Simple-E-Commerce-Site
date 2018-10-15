@@ -28,9 +28,13 @@ namespace ECommerceSystem.Controllers
 
         public ActionResult SellOrder(int id)
         {
-            Product product = aCustomerManager.GetProductByProductTypeId(id);
+            Product product = aCustomerManager.GetProductByProductId(id);
+            SalesRecord record=new SalesRecord();
+            record.ProductId = product.ProductId;
+            record.CustomerId = 2;
+             Session["msg"] = aCustomerManager.SendOrder(record);
 
-            return null;
+            return RedirectToAction("Index");
         }
 	}
 }

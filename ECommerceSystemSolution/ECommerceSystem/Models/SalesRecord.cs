@@ -7,6 +7,8 @@ namespace ECommerceSystem.Models
 {
     public class SalesRecord
     {
-
+        public int SalesRecordId { get; set; }
+        public int ProductId { get; set; }
+        public int CustomerId { get; set; }
     }
 }
