@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ECommerceSystem.Models.SalesRecord>
+
+@{
+    ViewBag.Title = "GetAllOrder";
+    Layout = "~/Views/Shared/Supplier.cshtml";
+}
+
+<h2 style="text-align: center; color: green">Order List</h2>
+
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th style="text-align: center">
+            @Html.DisplayNameFor(model => model.ProductId)
+        </th>
+        <th style="text-align: center">
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td style="text-align: center">
+            @Html.DisplayFor(modelItem => item.ProductId)
+        </td>
+        <td style="text-align: center">
+            @Html.DisplayFor(modelItem => item.CustomerId)
+        </td>
+    </tr>
+}
+
+</table>
+<div class="order" style="text-align: right">
+    <label>Total Order</label>
+    <input type="text" name="order" id="order" value="@ViewBag.TotalOrder" disabled="disabled" style="text-align: center"/>
+</div>

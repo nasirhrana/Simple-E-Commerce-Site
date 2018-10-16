@@ -74,7 +74,7 @@
         <div class="form-group">
             <label class="control-label col-md-4"></label>
             <div class="col-md-8">
-                <textarea name="Description" form="usrform" class="form-control" placeholder="Enter Description"></textarea>
+                     @Html.TextAreaFor(m => m.Description, new { @class = "form-control", placeholder = "Description of Product" })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
         </div>
         </div>

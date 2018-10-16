@@ -17,11 +17,22 @@ namespace ECommerceSystem.Controllers
 
         public ActionResult Index()
         {
+
+            if (Session["Id"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+                ;
+            }
             return View();
         }
         [HttpGet]
         public ActionResult CreateUser()
         {
+            if (Session["Id"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+                ;
+            }
             ViewBag.UserType = adminManager.GetAllUserType();
            
             return View();
@@ -29,6 +40,7 @@ namespace ECommerceSystem.Controllers
         [HttpPost]
         public ActionResult CreateUser(User user)
         {
+
             ViewBag.UserType = adminManager.GetAllUserType();
             if (ModelState.IsValid)
             {
@@ -39,6 +51,11 @@ namespace ECommerceSystem.Controllers
         [HttpGet]
         public ActionResult CreateProduct()
         {
+            if (Session["Id"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+                ;
+            }
             ViewBag.ProductCode = adminManager.GetAllProductCode();
             return View();
         }
@@ -77,8 +94,11 @@ namespace ECommerceSystem.Controllers
 
                 try
                 {
+                    if (ModelState.IsValid)
+                    {
+                        ViewBag.Message = adminManager.SaveProduct(product);
+                    }
 
-                    ViewBag.Message = adminManager.SaveProduct(product);
 
                 }
                 catch (Exception exception)
@@ -97,6 +117,11 @@ namespace ECommerceSystem.Controllers
 
         public ActionResult GetAllOrder()
         {
+            if (Session["Id"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+                ;
+            }
             List<SalesRecord> salesList = adminManager.GetAllSalesRecord();
             ViewBag.TotalOrder = salesList.Count;
             return View(salesList);
